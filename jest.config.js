@@ -6,7 +6,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['<rootDir>/src/tests/'],
   collectCoverageFrom: ['<rootDir>/src/**/*.ts', '<rootDir>/src/**/*.tsx'],
-  setupFiles: [join(__dirname, './jest-setup')],
+  setupFiles: [join(__dirname, './scripts/jest/jest-setup')],
   coverageDirectory: './src/tests/coverage',
   coveragePathIgnorePatterns: [
     '<rootDir>[/\\\\](node_modules|src/types|src/tests|src/contexts|src/scripts|src/storybook|src/styles|src/hooks)[/\\\\]',
@@ -17,14 +17,14 @@ module.exports = {
   ],
   modulePathIgnorePatterns: ['<rootDir>[/\\\\](node_modules|public|dist)[/\\\\]'],
   moduleNameMapper: {
-    '^.+\\.svg$': join(__dirname, './svg-transform.js'),
+    '^.+\\.svg$': join(__dirname, './scripts/jest/svg-transform.js'),
     '@/(.*)': '<rootDir>/src/$1',
-    '^.+.(?=.*scss|sass|css|png|jpg|pdf|jpeg).*': join(__dirname, './css-stub.js'),
+    '^.+.(?=.*scss|sass|css|png|jpg|pdf|jpeg).*': join(__dirname, './scripts/jest/css-stub.js'),
     '\\.(css)$': '<rootDir>/src/scripts/style-mock.js',
   },
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx', 'graphql', 'gql', 'mjs'],
-  globalSetup: join(__dirname, './jest-global.js'),
-  resolver: join(__dirname, './resolver.js'),
+  globalSetup: join(__dirname, './scripts/jest/jest-global.js'),
+  resolver: join(__dirname, './scripts/jest/resolver.js'),
   coverageThreshold: {
     global: {
       branches: 90,

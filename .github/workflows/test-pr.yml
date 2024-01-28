@@ -15,10 +15,14 @@ jobs:
   test-pr:
     name: Test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        shard: [1/4, 2/4, 3/4, 4/4]
     steps:
+      - uses: seferov/pr-lint-action@master
+        with:
+          title-regex: '^(?:(?:\[WIP\] ?)?(?:build|ci|chore|docs|task|feat|fix|perf|refactor|revert|style|test)\:(?:\ +?#\d+?\ +?)?.*)|(?:\[Snyk\].*)'
+          title-regex-flags: 'g' # optional
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-close-message: 'Closing this pull request since the title does not match %pattern% pattern. Please fix the title and re-open the pull request.'
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -32,10 +36,22 @@ jobs:
       - name: Install
         run: yarn
 
-      - name: Fetch config
+      - name: Lint
         run: |
-          yarn workspaces foreach --parallel --verbose --since --recursive run conf --name development
+          yarn lint
+
+      - name: TypeCheck
+        run: |
+          yarn check
 
       - name: Test
         run: |
-          yarn workspaces foreach --parallel --verbose --interlaced --since --recursive run test --watch=false --ci --forceExit --detectOpenHandles --runInBand --passWithNoTests --shard=${{ matrix.shard }}
+          yarn test --watch=false --ci --forceExit --detectOpenHandles --runInBand --passWithNoTests
+
+      - name: Build Lib
+        run: |
+          yarn build:dist
+
+      - name: Build Storybook
+        run: |
+          yarn build:storybook

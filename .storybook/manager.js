@@ -1,6 +1,6 @@
 import addons from '@storybook/addons'
 import { create } from '@storybook/theming'
-import { version } from '../packages/elements/package.json'
+import { version } from '../package.json'
 
 addons.setConfig({
   theme: create({
