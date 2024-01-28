@@ -1,0 +1,63 @@
+name: Release Dev
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+  AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+  AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+  AWS_REGION: ${{secrets.AWS_REGION}}
+  SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
+  CI: true
+  APP_STAGE: 'development'
+  GH_PAT: ${{ secrets.GH_PAT }}
+  DEVOPS_OIDC_ROLE: ${{ secrets.DEVOPS_OIDC_ROLE }}
+  DEVOPS_BUCKET_ROLE: ${{ secrets.DEVOPS_BUCKET_ROLE }}
+  DEVOPS_PRIMARY_REGION: ${{ secrets.DEVOPS_PRIMARY_REGION }}
+  DEVOPS_ARTIFACT_BUCKET: ${{ secrets.DEVOPS_ARTIFACT_BUCKET }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  release-dev:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Install
+        run: yarn
+
+      - name: Set yarn since
+        run: |
+          yarn config set changesetBaseRefs --json '["HEAD~1"]'
+
+      - name: Fetch config
+        run: |
+          yarn workspaces foreach --parallel --verbose --since --recursive run conf --name development
+
+      - name: Build
+        run: |
+          yarn workspaces foreach --parallel --verbose --since --recursive run build
+
+      - name: Release
+        run: |
+          yarn workspaces foreach --parallel --verbose --since --recursive run release
+
+      - name: Deploy
+        run: |
+          yarn workspaces foreach --parallel --verbose --since --recursive run deploy

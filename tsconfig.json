@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "noEmit": false,
+    "noImplicitAny": false,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "typeRoots": ["./node_modules/@types"],
+    "sourceMap": true,
+    "inlineSources": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "module": "ES2022",
+    "target": "ES2022",
+    "declaration": true,
+    "moduleResolution": "node",
+    "types": ["jest", "node", "react"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "lib": ["es2015", "es2017", "dom", "es5", "es6", "esnext"],
+    "outDir": "dist",
+    "sourceRoot": "/"
+  },
+  "include": ["src", "public"],
+  "exclude": [
+    "**/public/**/*",
+    "**/dist/**/*",
+    ".yarn/**/*",
+    "**/node_modules/**/*",
+    "**/coverage/**/*",
+    "archive/**/*"
+  ]
+}

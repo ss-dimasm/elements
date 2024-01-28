@@ -1,0 +1,102 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/packages/*/node_modules
+
+# testing
+/coverage
+/packages/*/src/tests/coverage
+
+# production
+/packages/*/build
+/packages/*/dist
+/packages/elements-legacy/v3
+/packages/*/public/service
+/packages/*/public/dist
+/packages/*/.serverless
+/packages/web-components/public/*
+.rts2_cache*
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+reapit-config.json
+config.source.json
+config.json
+reapit-config-types.ts
+env.yml
+
+# log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/packages/*/*.log*
+/packages/*/src/*.log*
+*.log
+
+.cache/
+coverage/
+!dist/index.html
+dist-npm/
+dist-cdn/
+
+# os files
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.temp
+
+.rts2_cache*
+storybook-static
+elements/public
+out*
+package-lock.json
+.env
+invite-developers.js
+
+# eslint cache
+.eslintcache
+
+# webpack cache
+.webpack-cache
+scripts/webpack/webpack-sass-prod/.temp/*
+
+# jest cache
+.jest-cache
+
+# .linaria-cache
+.linaria-cache
+
+# credentials temp files, using in yarn scan-secrets
+.temp-credentials
+
+# credentials file to load
+credentials.json
+# Yarn
+.yarn/*
+!.yarn/patches
+.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+.docz/
+dist
+cdk.out
+dist.zip
+bundle.zip
+!output.ts
+.ts-bundler-incremental-state.json
+cdk.context.json
+
+packages/cognito-custom-mail-lambda/**/*.html
+
+.tmp
