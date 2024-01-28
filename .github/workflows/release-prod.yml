@@ -7,8 +7,6 @@ on:
 env:
   NPM_TOKEN: ${{secrets.NPM_TOKEN}}
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-  SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
-  RELEASE_SLACK_WEB_HOOK_URL: ${{secrets.RELEASE_SLACK_WEB_HOOK_URL}}
   AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID_PROD}}
   AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY_PROD}}
   AWS_REGION: ${{secrets.AWS_REGION}}
@@ -16,10 +14,6 @@ env:
   IS_RELEASE: true
   APP_STAGE: 'production'
   GH_PAT: ${{ secrets.GH_PAT }}
-  DEVOPS_OIDC_ROLE: ${{ secrets.DEVOPS_OIDC_ROLE }}
-  DEVOPS_BUCKET_ROLE: ${{ secrets.DEVOPS_BUCKET_ROLE }}
-  DEVOPS_PRIMARY_REGION: ${{ secrets.DEVOPS_PRIMARY_REGION }}
-  DEVOPS_ARTIFACT_BUCKET: ${{ secrets.DEVOPS_ARTIFACT_BUCKET }}
 
 permissions:
   contents: read
@@ -54,40 +48,30 @@ jobs:
       - name: Install
         run: yarn
 
-      - name: Fetch config
-        run: |
-          yarn workspace ${{ steps.tagName.outputs.package }} run conf --name production
-
       - name: Lint
         run: |
-          yarn workspace ${{ steps.tagName.outputs.package }} run lint
+          yarn lint
+
+      - name: TypeCheck
+        run: |
+          yarn check
 
       - name: Test
         run: |
-          yarn workspace ${{ steps.tagName.outputs.package }} run test --watch=false --ci --silent --forceExit --detectOpenHandles --runInBand
+          yarn test --watch=false --ci --forceExit --detectOpenHandles --runInBand --passWithNoTests
 
-      - name: Build
+      - name: Build Lib
         run: |
-          yarn workspace ${{ steps.tagName.outputs.package }} run build
+          yarn build:dist
 
-      - name: Package Version Bump
+      - name: Build Storybook
         run: |
-          yarn workspace ${{ steps.tagName.outputs.package }} version ${{ steps.tagName.outputs.version }}
-
-      - name: Commit
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: 'chore: bump ${{ steps.tagName.outputs.package }} version'
-          branch: master
-
-      - name: Release
-        run: |
-          yarn workspace ${{ steps.tagName.outputs.package }} run release --stage prod
+          yarn build:storybook
 
       - name: Deploy
         run: |
-          yarn workspace ${{ steps.tagName.outputs.package }} run deploy
+          yarn deploy
 
       - name: Publish
         run: |
-          yarn workspace ${{ steps.tagName.outputs.package }} run publish --tag latest
+          yarn publish --tag latest

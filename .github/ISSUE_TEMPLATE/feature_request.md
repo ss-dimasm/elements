@@ -2,9 +2,8 @@
 name: Feature request
 about: Suggest an idea for this project
 title: ''
-labels: external-request, needs-triage
+labels: needs-triage, feature
 assignees: ''
-
 ---
 
 **Is your feature request related to a problem? Please describe.**
