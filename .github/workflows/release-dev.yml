@@ -24,6 +24,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_OIDC_ARN_DEV }}
           role-session-name: AWS_OIDC_ARN_DEV
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Checkout
         uses: actions/checkout@v4
