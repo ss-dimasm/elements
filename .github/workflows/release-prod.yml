@@ -13,6 +13,7 @@ env:
 permissions:
   contents: write
   id-token: write
+  pull-requests: write
 
 jobs:
   release-prod:
@@ -73,13 +74,14 @@ jobs:
         run: |
           yarn version ${{ steps.tagName.outputs.version }}
 
-      - name: Commit
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
         with:
           commit_message: 'chore: bump version to ${{ steps.tagName.outputs.version }}'
-          branch: main
-          token: ${{ secrets.GH_PAT }}
-          push_options: '--force'
+          title: 'chore: bump version to ${{ steps.tagName.outputs.version }}'
+          body: Update to version in package.json
+          base: main
+          branch: chore/update-version
 
       - name: Deploy
         run: |
