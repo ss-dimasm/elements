@@ -14,32 +14,24 @@ _As part of the v5 Elements release, each component will be reviewed and refacto
 **Specification**
 
 - Is new component or existing?
-
 - Is the component being re-named?
-
 - Is the component design signed off by product and design?
-
-- Guide to component structure & documentation in storybook:
-  
-- Link to DS in Figma:
-
-- Link to Elements Audit in Figma:
-
-- Additional behavioural specification:
-
-- Accessibility requirements:
-
+- [Guide to component structure & documentation in storybook](https://github.com/reapit/elements/wiki/Developer-Contribution-Guide)
+- [Link to DS in Figma]()
+- [Link to Elements Audit in Figma]()
+- [Additional behavioural specification]()
+- [Accessibility requirements]()
 
 **Developer Checklist**
 
-- [ ] Styles alignment between Design System and Elements as per above.
+- [ ] Styles alignment between Design System and Elements
 - [ ] Check design tokens in Figma and implement CSS variable tokens if available for relevant component
-- [ ] Align with accessibility standards / spec as per above.
-- [ ] If relevant, break down component into basic and composed component structures
+- [ ] Align with accessibility standards / spec as per above
+- [ ] If relevant, break down component into `Styles Only` and `React` component structures
 - [ ] Ensure all variants of components are documented as appropriate 
 - [ ] Ensure unit test coverage is adequate for component
 - [ ] Update documentation in MDX file as per guidelines
-- [ ] Changelog updated to reflect a single beta version per component ideally.
+- [ ] Changelog updated to reflect a single beta version per component ideally
 
 **Release Checklist**
 
