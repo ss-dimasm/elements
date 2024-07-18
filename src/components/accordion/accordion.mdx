@@ -11,26 +11,27 @@ An accordion component allows collapsable content where space is at a premium, f
 
 To open the accordion for vanilla usage, you will need to both toggle the `elIsActive` class on the content div and switch the `down` icon for `upSystem` - see the different states below.
 
-## Basic Usage
+## Styles Only Usage
 
-<Canvas of={AccordionStories.BasicUsage} />
+<Canvas of={AccordionStories.StylesOnlyUsage} />
 
-<RenderHtmlMarkup of={AccordionStories.BasicUsage} />
+<RenderHtmlMarkup of={AccordionStories.StylesOnlyUsage} />
 
 ## React Usage
 
 <Controls />
 
-The React shorthand version of the Accordion handles the toggling of active classes for you. The props accepted by the `AccordionItem` are below along with the `AccordionItemProps` interface.
+The React version of the Accordion handles the toggling of active classes for you. The props accepted by the `AccordionItem` are below along with the `AccordionItemProps` interface.
 
-<Source code={`
+<Source
+  code={`
 export interface AccordionItemProps {
   title: string
   titleItems?: ReactNode[]
   content: ReactNode
 }
-`} language="typescript" />
+`}
+  language="typescript"
+/>
 
 <Canvas of={AccordionStories.ReactUsage} />
-
-<RenderHtmlMarkup of={AccordionStories.ReactUsage} />

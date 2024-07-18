@@ -1,31 +1,9 @@
-import { FC, Fragment, HTMLAttributes, MutableRefObject, useRef } from 'react'
+import { FC, Fragment, MutableRefObject, useRef } from 'react'
 import { cx } from '@linaria/core'
-import {
-  elTabsFullWidth,
-  elTabsHasNoBorder,
-  ElTabs,
-  elTabsItem,
-  ElTabsLabel,
-  ElTabsWrap,
-  ElTabsFooter,
-  ElTabsOptionsWrap,
-} from './__styles__/index'
+import { elTabsFullWidth, elTabsHasNoBorder } from './styles'
 import { handleKeyboardEvent } from '../../storybook/handle-keyboard-event'
-
-export interface TabsOption {
-  id: string
-  value: string
-  text: string
-  isChecked: boolean
-}
-
-export interface TabsProps extends HTMLAttributes<HTMLInputElement> {
-  options: TabsOption[]
-  name: string
-  isControlled?: boolean
-  isFullWidth?: boolean
-  hasNoBorder?: boolean
-}
+import { TabsProps } from './types'
+import { TabsWrap, TabsOptionsWrap, Tab, TabsLabel, TabsItem, TabsFooter } from './tabs.atoms'
 
 export const handleKeyboardTabChange =
   (tabsRefs: MutableRefObject<(HTMLInputElement | null)[]>, index: number) => () => {
@@ -36,13 +14,13 @@ export const Tabs: FC<TabsProps> = ({ className, isFullWidth, hasNoBorder, isCon
   const tabsRefs = useRef<(HTMLInputElement | null)[]>([])
 
   return (
-    <ElTabsWrap className={cx(className, isFullWidth && elTabsFullWidth)}>
-      <ElTabsOptionsWrap role="tablist">
+    <TabsWrap className={cx(className, isFullWidth && elTabsFullWidth)}>
+      <TabsOptionsWrap role="tablist">
         {options.map(({ id, value, text, isChecked }, index) => (
           <Fragment key={id}>
-            <ElTabs
+            <Tab
               id={id}
-              ref={(el) => (tabsRefs.current[index] = el)}
+              ref={(el) => ((tabsRefs as any).current[index] = el)}
               name={name}
               value={value}
               type="radio"
@@ -51,18 +29,18 @@ export const Tabs: FC<TabsProps> = ({ className, isFullWidth, hasNoBorder, isCon
               checked={isControlled ? isChecked : undefined}
               defaultChecked={isControlled ? undefined : isChecked}
             />
-            <ElTabsLabel
+            <TabsLabel
               htmlFor={id}
               role="tab"
               tabIndex={0}
               onKeyDown={handleKeyboardEvent('Enter', handleKeyboardTabChange(tabsRefs, index))}
             >
-              <span className={elTabsItem}>{text}</span>
-            </ElTabsLabel>
+              <TabsItem>{text}</TabsItem>
+            </TabsLabel>
           </Fragment>
         ))}
-      </ElTabsOptionsWrap>
-      <ElTabsFooter className={cx(isFullWidth && elTabsFullWidth, hasNoBorder && elTabsHasNoBorder)} />
-    </ElTabsWrap>
+      </TabsOptionsWrap>
+      <TabsFooter className={cx(isFullWidth && elTabsFullWidth, hasNoBorder && elTabsHasNoBorder)} />
+    </TabsWrap>
   )
 }

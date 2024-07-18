@@ -1,43 +1,11 @@
-import React, { FC, HTMLAttributes, createRef, useEffect } from 'react'
+import { FC, HTMLAttributes, Ref, RefObject, createRef, useEffect } from 'react'
 import { cx } from '@linaria/core'
-import { ElModalBg, ElModal, ElModalHeader, ElModalBody } from './__styles__'
+import { ModalBg, ModalContainer, ModalHeader, ModalBody } from './modal.atoms'
 import { elIsActive } from '../../styles/states'
 import { useId } from '../../storybook/random-id'
+import { ModalProps } from './types'
 
-export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
-  isOpen: boolean
-  onModalClose: () => void
-  title?: string
-  className?: string
-}
-
-export interface ModalBaseProps extends HTMLAttributes<HTMLElement> {}
-
-export const ModalBg: FC<ModalBaseProps> = ({ className, children, ...rest }: ModalBaseProps) => (
-  <ElModalBg className={cx(className)} {...rest}>
-    {children}
-  </ElModalBg>
-)
-
-export const ModalContainer: FC<ModalBaseProps> = ({ className, children, ...rest }: ModalBaseProps) => (
-  <ElModal className={cx(className)} {...rest}>
-    {children}
-  </ElModal>
-)
-
-export const ModalHeader: FC<ModalBaseProps> = ({ className, children, ...rest }: ModalBaseProps) => (
-  <ElModalHeader className={cx(className)} {...rest}>
-    {children}
-  </ElModalHeader>
-)
-
-export const ModalBody: FC<ModalBaseProps> = ({ className, children, ...rest }: ModalBaseProps) => (
-  <ElModalBg className={cx(className)} {...rest}>
-    {children}
-  </ElModalBg>
-)
-
-export const handleModalFocus = (modalRef: React.RefObject<HTMLDivElement>, isOpen: boolean) => () => {
+export const handleModalFocus = (modalRef: RefObject<HTMLDivElement>, isOpen: boolean) => () => {
   if (isOpen && modalRef.current) {
     modalRef.current.focus()
   }
@@ -68,19 +36,19 @@ export const Modal: FC<ModalProps> = ({ isOpen, onModalClose, title, className, 
 
   return (
     <>
-      <ElModalBg className={elIsActive} onClick={onModalClose} />
-      <ElModal
+      <ModalBg className={elIsActive} onClick={onModalClose} />
+      <ModalContainer
         role="dialog"
         aria-modal="true"
         aria-describedby={id}
         className={modalCombinedClassname}
-        ref={modalRef}
+        ref={modalRef as unknown as Ref<HTMLAttributes<HTMLElement>>}
         autoFocus
         {...rest}
       >
-        {title && <ElModalHeader>{title}</ElModalHeader>}
-        <ElModalBody id={id}>{children}</ElModalBody>
-      </ElModal>
+        {title && <ModalHeader>{title}</ModalHeader>}
+        <ModalBody id={id}>{children}</ModalBody>
+      </ModalContainer>
     </>
   )
 }

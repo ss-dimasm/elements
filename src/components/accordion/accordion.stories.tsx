@@ -13,13 +13,13 @@ import { elIsActive } from '../../styles/states'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Accordion> = {
-  title: 'Accordion',
+  title: 'Components/Accordion',
   component: Accordion,
 }
 
 export default meta
 
-export const BasicUsage = {
+export const StylesOnlyUsage = {
   render: ({}) => (
     <AccordionContainer>
       <AccordionItem onClick={console.log} id="item-title-1" aria-controls="item-content-1">

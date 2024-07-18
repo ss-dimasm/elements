@@ -1,18 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Accordion react shorthand should match a snapshot 1`] = `
+exports[`Accordion basic usage should match a snapshot 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <mock-styled.div>
-        <mock-styled.a
-          aria-controls="test-static-id-0"
-          aria-label="Accordion item, hit return to expand content"
-          id="test-static-id-0"
-          role="button"
-          tabindex="0"
-        >
+        <mock-styled.a>
           <mock-styled.div>
             Accordion Item 1
           </mock-styled.div>
@@ -45,34 +39,22 @@ exports[`Accordion react shorthand should match a snapshot 1`] = `
             </mock-styled.div>
             <mock-styled.div>
               <mock-styled.span
-                classname="mock-css."
-                style="font-size: 1.25rem;"
+                classname=""
               >
                 <svg
                   role="img"
-                  style="font-size: 1.25rem;"
-                  title="Icon image with name chevronDown"
+                  title="Icon image with name chevronUp"
                 />
               </mock-styled.span>
             </mock-styled.div>
           </mock-styled.div>
         </mock-styled.a>
         <mock-styled.div
-          aria-expanded="false"
-          aria-labelledby="test-static-id-0"
-          classname=""
-          id="test-static-id-0"
-          role="region"
+          classname="mock-css."
         >
           Accordion Content 1
         </mock-styled.div>
-        <mock-styled.a
-          aria-controls="test-static-id-1"
-          aria-label="Accordion item, hit return to expand content"
-          id="test-static-id-1"
-          role="button"
-          tabindex="0"
-        >
+        <mock-styled.a>
           <mock-styled.div>
             Accordion Item 2
           </mock-styled.div>
@@ -105,25 +87,17 @@ exports[`Accordion react shorthand should match a snapshot 1`] = `
             </mock-styled.div>
             <mock-styled.div>
               <mock-styled.span
-                classname="mock-css."
-                style="font-size: 1.25rem;"
+                classname=""
               >
                 <svg
                   role="img"
-                  style="font-size: 1.25rem;"
                   title="Icon image with name chevronDown"
                 />
               </mock-styled.span>
             </mock-styled.div>
           </mock-styled.div>
         </mock-styled.a>
-        <mock-styled.div
-          aria-expanded="false"
-          aria-labelledby="test-static-id-1"
-          classname=""
-          id="test-static-id-1"
-          role="region"
-        >
+        <mock-styled.div>
           Accordion Content 2
         </mock-styled.div>
       </mock-styled.div>
@@ -131,13 +105,7 @@ exports[`Accordion react shorthand should match a snapshot 1`] = `
   </body>,
   "container": <div>
     <mock-styled.div>
-      <mock-styled.a
-        aria-controls="test-static-id-0"
-        aria-label="Accordion item, hit return to expand content"
-        id="test-static-id-0"
-        role="button"
-        tabindex="0"
-      >
+      <mock-styled.a>
         <mock-styled.div>
           Accordion Item 1
         </mock-styled.div>
@@ -170,34 +138,22 @@ exports[`Accordion react shorthand should match a snapshot 1`] = `
           </mock-styled.div>
           <mock-styled.div>
             <mock-styled.span
-              classname="mock-css."
-              style="font-size: 1.25rem;"
+              classname=""
             >
               <svg
                 role="img"
-                style="font-size: 1.25rem;"
-                title="Icon image with name chevronDown"
+                title="Icon image with name chevronUp"
               />
             </mock-styled.span>
           </mock-styled.div>
         </mock-styled.div>
       </mock-styled.a>
       <mock-styled.div
-        aria-expanded="false"
-        aria-labelledby="test-static-id-0"
-        classname=""
-        id="test-static-id-0"
-        role="region"
+        classname="mock-css."
       >
         Accordion Content 1
       </mock-styled.div>
-      <mock-styled.a
-        aria-controls="test-static-id-1"
-        aria-label="Accordion item, hit return to expand content"
-        id="test-static-id-1"
-        role="button"
-        tabindex="0"
-      >
+      <mock-styled.a>
         <mock-styled.div>
           Accordion Item 2
         </mock-styled.div>
@@ -230,25 +186,17 @@ exports[`Accordion react shorthand should match a snapshot 1`] = `
           </mock-styled.div>
           <mock-styled.div>
             <mock-styled.span
-              classname="mock-css."
-              style="font-size: 1.25rem;"
+              classname=""
             >
               <svg
                 role="img"
-                style="font-size: 1.25rem;"
                 title="Icon image with name chevronDown"
               />
             </mock-styled.span>
           </mock-styled.div>
         </mock-styled.div>
       </mock-styled.a>
-      <mock-styled.div
-        aria-expanded="false"
-        aria-labelledby="test-static-id-1"
-        classname=""
-        id="test-static-id-1"
-        role="region"
-      >
+      <mock-styled.div>
         Accordion Content 2
       </mock-styled.div>
     </mock-styled.div>
